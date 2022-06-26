@@ -9,10 +9,11 @@ const app = express();
 app.use(logger("dev"));
 app.use(bodyparser.json());
 
-
-
 //routes
-app.use('/api/v1',router)
+app.get("/", (req, res) => {
+  res.render("File Sharing app");
+});
+app.use("/api/v1", router);
 
 //server
 app.use((req, res, next) => {
