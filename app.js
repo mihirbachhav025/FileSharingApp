@@ -4,11 +4,22 @@ const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
 const router = require("./routes/files");
 require("dotenv").config();
+mongoose.connect(process.env.Mongo_Uri, {
+  newUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: true,
+});
 const app = express();
 
 app.use(logger("dev"));
 app.use(bodyparser.json());
-mongoose.connect(process.env.Mongo_Uri);
+mongoose.connect(process.env.Mongo_Uri, {
+  newUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: true,
+});
 //routes
 app.get("/", (req, res) => {
   res.render("File Sharing app");
@@ -38,7 +49,7 @@ app.use((err, req, res, next) => {
 //server
 const port = process.env.port || 5000;
 // mongoose.connect(process.env.Mongo_Uri).then(() => {
-  
+
 // });
 app.listen(port, () => {
   console.log("Server is listening on port", port);
