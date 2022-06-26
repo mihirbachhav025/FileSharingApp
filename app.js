@@ -47,7 +47,7 @@ app.use((err, req, res, next) => {
 });
 
 //server
-const port = process.env.port || 5000;
+const port = process.env.port;
 // mongoose.connect(process.env.Mongo_Uri).then(() => {
 
 // });
