@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
 
 //server
 console.log(String(process.env.Mongo_Uri));
-const port = process.env.port;
+const port = process.env.PORT;
 if (port == null || port == "") {
   port = 5000;
 }
