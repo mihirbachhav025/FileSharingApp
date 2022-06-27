@@ -37,7 +37,10 @@ app.use((err, req, res, next) => {
 
 //server
 console.log(String(process.env.Mongo_Uri));
-const port = process.env.port || 5000;
+const port = process.env.port;
+if (port == null || port == "") {
+  port = 5000;
+}
 mongoose
   .connect(String(process.env.Mongo_Uri))
   .then(() => {
