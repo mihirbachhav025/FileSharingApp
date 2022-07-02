@@ -3,11 +3,12 @@ const { v4: uuid4 } = require("uuid");
 const { json } = require("body-parser");
 const sendEmail = require("../services/emailservice");
 const { sendMail } = require("../services/emailservice");
+const fs = require("fs");
 module.exports = {
   postFile: async (req, res, next) => {
     console.log(req.file);
     //Store file
-    if (!req.file) return res.json({ error: "File is reqired" });
+    if (!req.file) return res.json({ error: "File is required" });
     //Store into Database
     const file = new File({
       filename: req.file.filename,
@@ -17,7 +18,11 @@ module.exports = {
     });
     const response = await file.save();
     //Response Link
-
+    setTimeout(() => {
+      fs.unlink(response.path, () => {
+        File.findOneAndDelete({ uuid: response.uuid });
+      });
+    }, 1000 * 60 * 60 * 24);
     return res.json({
       file: `${process.env.APP_BASE_URL}/api/v1/files/${response.uuid}`,
       fileuuid: response.uuid,
