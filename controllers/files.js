@@ -22,6 +22,7 @@ module.exports = {
       fs.unlink(response.path, () => {
         File.findOneAndDelete({ uuid: response.uuid });
       });
+      //added 24 hour timeout
     }, 1000 * 60 * 60 * 24);
     return res.json({
       file: `${process.env.APP_BASE_URL}/api/v1/files/${response.uuid}`,
