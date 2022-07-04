@@ -23,8 +23,8 @@ module.exports = {
         File.findOneAndDelete({ uuid: response.uuid });
       });
       //added 24 hour timeout
-      console.log("Added File timeout");
     }, 1000 * 60 * 60 * 24);
+    console.log("Added File timeout");
     return res.json({
       file: `${process.env.APP_BASE_URL}/api/v1/files/${response.uuid}`,
       fileuuid: response.uuid,
